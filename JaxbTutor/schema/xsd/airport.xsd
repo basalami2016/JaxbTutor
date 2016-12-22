@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+   targetNamespace="http://www.w3schools.com"
+   xmlns="http://www.w3schools.com"
+   elementFormDefault="qualified"
+   xmlns:jxb="http://java.sun.com/xml/ns/jaxb"
+   jxb:version="2.0">  
+   
+   <xs:complexType name="AirportType">
+      <xs:attribute name="LocId" type="xs:ID"     use="required"/>
+      <xs:attribute name="Name"  type="xs:string" use="required"/>
+   </xs:complexType>
+
+   <xs:complexType name="FlightType">
+     <xs:all>
+       <xs:element name="From"    type="xs:IDREF"/>
+       <xs:element name="To"      type="xs:IDREF"/>
+       <xs:element name="Carrier" type="xs:string"/>
+       <xs:element name="DepTime" type="xs:time"/>
+       <xs:element name="ArrTime" type="xs:time"/>
+    </xs:all>
+    <xs:attribute name="Number" type="xs:int" use="required"/>
+  </xs:complexType>
+
+  <xs:complexType name="TimetableType">
+    <xs:sequence>
+      <xs:element name="Airports" type="AirportType" maxOccurs="unbounded"/>
+      <xs:element name="Flight"   type="FlightType"  maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+  
+  <xs:element name="airport" type="AirportType"/>
+  <xs:element name="flight" type="FlightType"/>
+  <xs:element name="timetable" type="TimetableType"/>
+  
+</xs:schema>

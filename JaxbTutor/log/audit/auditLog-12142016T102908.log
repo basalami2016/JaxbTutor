@@ -1,0 +1,2 @@
+12-14-2016 10:29:08.430 [main] INFO  c.NISTTestRunner Groovy - Failure Message:  multiplicationOfZeroIntegersShouldReturnZero(com.haat.xsdt.NISTxsdTest): X should be less than 1000
+12-14-2016 10:29:08.441 [main] INFO  c.NISTTestRunner Groovy - Failure Message:  testMultiply(com.haat.xsdt.NISTxsdTest): 10 x 5 must be 50 expected:<50> but was:<2>

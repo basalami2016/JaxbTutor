@@ -1,0 +1,128 @@
+plugins {
+  id "java"
+}
+
+configurations {
+    jaxb
+    compile.extendsFrom(configurations.jaxb)
+}
+
+repositories { 
+    mavenCentral()
+  }
+  
+dependencies { 
+      jaxb('com.sun.xml.bind:jaxb-xjc:2.2.11')  
+      jaxb('com.sun.xml.bind:jaxb-impl:2.2.11')
+      jaxb('com.sun.xml.bind:jaxb-core:2.2.11')    
+      //compile('org.slf4j:slf4j-api:1.7.21')
+      compile('ch.qos.logback:logback-classic:1.1.8'){  
+         //exclude group: 'org.slf4j' ,  module: 'slf4j-api'     
+      }
+      //compile('org.slf4j:slf4j-nop:1.7.21')
+      //compile('org.slf4j:slf4j-simple:1.7.21')
+      compile('org.codehaus.groovy:groovy-all:2.4.7') 
+     // compile('org.apache.tomcat:juli:6.0.26')
+      compile('junit:junit:4.12')
+      //testCompile 'junit:junit:4.12'
+     
+  }
+      
+ext { 
+     //destDir = file("$buildDir/generated-src") 
+     destDir = file("$projectDir/src/main/java")       
+     //"$buildDir/libs"      
+ } 
+ 
+task jaxb{ 
+   ext {       
+       //srcFile = file('schema/xsd/haat.xsd')
+       //srcFile = file('schema/xsd/airport.xsd')
+        srcFile = file('nist/schema/xsd/sp800-53-feed_2.0.xsd')  
+        //catFile = file('nist/schema/xsd/binder.cat')
+        catFile = file('nist/schema/xsd/catalog.xml')
+        bindFile = file('nist/schema/xsd/bindings.xjb')            
+        xsdDestDir = file("${destDir}"  + "/haat")        
+        pkgName = "com.haat.app" 
+               
+   }   
+       xsdDestDir.mkdirs()
+       inputs.file srcFile
+       inputs.file catFile
+       inputs.file bindFile
+       outputs.dir xsdDestDir
+       FileTree tree = fileTree(dir: "${xsdDestDir}")      
+       ant.lifecycleLogLevel = "INFO"    
+       doLast {   
+           //ant.echo(level: "info", message: "file list before executing JAXB")  
+           //tree.each {File file ->
+           //    ant.echo(level: "info", message: file)
+           //}         
+           ant.echo(level: "info", message: "instantiating XJC2Task begins ...")
+           ant.taskdef(name: 'xjc', classname: 'com.sun.tools.xjc.XJC2Task', classpath: configurations.jaxb.asPath)  
+           ant.echo(level: "info", message: "instantiating XJC2Task completed")
+           ant.echo(level: "info", message: "schema compilation begins ...")            
+           ant.xjc(    
+                 destdir: xsdDestDir,
+                 package: pkgName,
+                  schema: srcFile,  
+                  catalog: catFile,
+                  binding: bindFile,
+               extension: true, 
+         removeOldOutput: true,
+             //failonerror: false
+                           
+         )        
+           ant.echo(level: "info", message: "schema compilation completed")     
+   }   
+           ant.echo(level: "info", message: "file list after executing JAXB") 
+           tree.each {File file ->
+                 ant.echo(level: "info", message: file)
+           }     
+}
+
+//jaxb.execute()
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '3.2'
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//http://stackoverflow.com/questions/23619178/how-to-compile-multiple-xsd-files-in-gradle-jaxb-xjc
+//
+//configurations {
+//    compile {
+//        description = 'compile classpath'
+//        transitive = true
+//    }
+//    jaxb {
+//        extendsFrom compile
+//    }
+//}-Djava.util.logging.manager=org.apache.juli.ClassLoaderLogManager
+
+
+
+
+
+
+
+
+
+
+

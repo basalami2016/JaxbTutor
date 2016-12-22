@@ -1,0 +1,136 @@
+<?xml version="1.0"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+   targetNamespace="http://www.w3schools.com"
+   xmlns="http://www.w3schools.com"
+   elementFormDefault="qualified"
+   xmlns:jxb="http://java.sun.com/xml/ns/jaxb"
+   jxb:version="2.0"> 
+    
+<xs:import schemaLocation="tutor.xsd" />
+<xs:import namespace=".//.//" schemaLocation="airport.xsd" />
+              
+<xs:complexType name="NoteType">
+   <xs:sequence>
+     <xs:element name="to" type="xs:string"/>
+     <xs:element name="from" type="xs:string"/>
+     <xs:element name="heading" type="xs:string"/>
+     <xs:element name="body" type="xs:string"/>
+   </xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="ZooType">
+  <xs:sequence>
+    <xs:element name="decimal"         type="xs:decimal"/>
+    <xs:element name="integer"         type="xs:integer"/>
+    <xs:element name="long"            type="xs:long"/>
+    <xs:element name="int"             type="xs:int"
+                 default="42"/>
+    <xs:element name="short_nil"       type="xs:short"
+                 nillable="true"/>
+    <xs:element name="byte"            type="xs:byte" 
+                 default="13"
+                 nillable="true"/>
+    <xs:element name="nonNegative"     type="xs:nonNegativeInteger"/>
+    <xs:element name="unsignedLong"    type="xs:unsignedLong"/>
+    <xs:element name="unsignedInt"     type="xs:unsignedInt"/>
+  </xs:sequence>
+</xs:complexType>
+
+<xs:simpleType name="CounterType">
+  <xs:restriction base="xs:int">
+    <xs:minInclusive value="0"/>
+  </xs:restriction>
+</xs:simpleType>
+
+<xs:simpleType name="ShortType">
+  <xs:restriction base="xs:string">
+    <xs:minLength  value="1"/>
+    <xs:maxLength  value="3"/>
+  </xs:restriction>
+</xs:simpleType>
+
+<xs:complexType name="DateTimeType">
+  <xs:sequence>
+    <xs:element name="Date" type="xs:date"/>
+    <xs:element name="Time" type="xs:time"/>
+  </xs:sequence>
+</xs:complexType>
+
+<xs:simpleType name="EnumDefType">
+  <xs:restriction base="xs:string">
+    <xs:enumeration value="eStwA"/>
+    <xs:enumeration value="eStwS"/>
+    <xs:enumeration value="SpDrL"/>
+    <xs:enumeration value="SpDrS"/>
+    <xs:enumeration value="VGS80"/>
+  </xs:restriction>
+</xs:simpleType>
+
+<xs:complexType name="RouteType">
+  <xs:attribute name="Pos" type="xs:int" use="optional" default="1"/>
+  <xs:attribute name="Dir" type="EnumDefType" use="required"/>
+</xs:complexType>
+
+<xs:complexType name="CommType">
+  <xs:choice>
+    <xs:element name="SMS"   type="xs:string"/>
+    <xs:element name="MMS"   type="xs:string"/>
+    <xs:element name="Email" type="xs:string"/>
+  </xs:choice>
+</xs:complexType>
+
+<xs:complexType name="EntryType">
+  <xs:attribute name="Text" type="xs:string"/>
+</xs:complexType>
+
+<xs:complexType name="ItemType">
+  <xs:complexContent>
+    <xs:extension base="EntryType">
+      <xs:sequence>
+        <xs:element name="Command" type="xs:string"/>
+      </xs:sequence>
+    </xs:extension>
+  </xs:complexContent>
+</xs:complexType>
+
+<xs:complexType name="CheckBoxType">
+  <xs:complexContent>
+    <xs:extension base="ItemType">
+      <xs:attribute name="State" type="xs:boolean"/>
+    </xs:extension>
+  </xs:complexContent>
+</xs:complexType>
+
+<xs:complexType name="RadioButtonType">
+  <xs:complexContent>
+    <xs:extension base="ItemType">
+      <xs:attribute name="Group" type="xs:string"/>      
+      <xs:attribute name="State" type="xs:boolean"/>
+      <xs:attribute name="Value" type="xs:string"/>
+    </xs:extension>
+  </xs:complexContent>
+</xs:complexType>
+
+<xs:complexType name="MenuType">
+  <xs:complexContent>
+    <xs:extension base="EntryType">
+      <xs:choice maxOccurs="unbounded">
+        <xs:element name="Item"        type="ItemType"/>
+        <xs:element name="CheckBox"    type="CheckBoxType"/>
+        <xs:element name="RadioButton" type="RadioButtonType"/>
+        <xs:element name="Menu"        type="MenuType"/>
+      </xs:choice>
+    </xs:extension>
+  </xs:complexContent>
+</xs:complexType>
+
+<xs:element name="comm" type="CommType"/>
+<xs:element name="enumdef" type="EnumDefType"/>
+<xs:element name="datetime" type="DateTimeType"/>
+<xs:element name="short" type="ShortType"/>
+<xs:element name="note" type="NoteType"/>
+<xs:element name="zoo" type="ZooType"/>
+<xs:element name="counter" type="CounterType"/>
+<xs:element name="route" type="RouteType"/>
+
+</xs:schema>

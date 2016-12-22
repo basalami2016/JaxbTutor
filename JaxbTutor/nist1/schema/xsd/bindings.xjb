@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE jaxb:bindings >   
+ <jaxb:bindings version="2.0"
+     xmlns:jaxb="http://java.sun.com/xml/ns/jaxb"
+     xmlns:xs="http://www.w3.org/2001/XMLSchema">
+           
+   <jaxb:bindings schemaLocation="xml.xsd" node="/xs:schema">
+   
+       <jaxb:schemaBindings>
+           <jaxb:package name="com.haat.apps"/>             
+       </jaxb:schemaBindings>
+       
+       <jaxb:bindings node="//xs:attribute[@name='lang']">
+            <jaxb:property name="LangAttr"/>
+       </jaxb:bindings> 
+       
+       <jaxb:bindings node="//xs:attribute[@name='space']">
+            <jaxb:property name="spaceAttr"/>
+       </jaxb:bindings> 
+       
+       <jaxb:bindings node="//xs:attribute[@name='base']">
+            <jaxb:property name="baseAttr"/>
+       </jaxb:bindings> 
+       
+   </jaxb:bindings>          
+ 
+</jaxb:bindings>
+
+<!-- <jaxb:bindings "xml.xsd" node="/xs:schema"> -->
+
+<!--  
+node="/xs:schema"> 
+<jaxb:bindings schemaLocation="file:/C:/eclipse/devops/haat/workspace/JaxbTutor/nist/schema/xsd/xml.xsd" node="/xs:schema">
+ <jaxb:bindings schemaLocation="nist/schema/xsd/xml.xsd" node="/xs:schema"> 
+<jaxb:bindings schemaLocation="http://www.w3.org/2001/xml.xsd" node="/xs:schema">
+<bindings xmlns="http://java.sun.com/xml/ns/jaxb" version="2.0"> 
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE Configuration >
+<jaxb:bindings xmlns:jaxb="http://java.sun.com/xml/ns/jaxb" 
+               version="2.0">    
+    
+    <jaxb:bindings schemaLocation="http://www.w3.org/2001/xml.xsd" node="/xs:schema">
+       <jaxb:schemaBindings>
+           <jaxb:package name="com.haat.xsd"/>
+       </jaxb:schemaBindings>
+       <jaxb:bindings node=".//xs:attribute[@name='lang']">
+          <jaxb:property name="langAttr"/>
+       </jaxb:bindings>
+   </jaxb:bindings>          
+ 
+</jaxb:bindings>
+-->
