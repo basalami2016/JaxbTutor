@@ -1,0 +1,5 @@
+projectKey=JaxbTutor:project
+serverUrl=http://localhost:9000
+dashboardUrl=http://localhost:9000/dashboard/index/JaxbTutor:project
+ceTaskId=AVko7M2R8p3nobGxDkOD
+ceTaskUrl=http://localhost:9000/api/ce/task?id=AVko7M2R8p3nobGxDkOD
