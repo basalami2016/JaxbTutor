@@ -1,5 +1,6 @@
 plugins {
   id "java"
+  id "org.sonarqube" version "2.2"
 }
 
 configurations {
@@ -62,17 +63,17 @@ task jaxb{
            ant.taskdef(name: 'xjc', classname: 'com.sun.tools.xjc.XJC2Task', classpath: configurations.jaxb.asPath)  
            ant.echo(level: "info", message: "instantiating XJC2Task completed")
            ant.echo(level: "info", message: "schema compilation begins ...")            
-           ant.xjc(    
-                 destdir: xsdDestDir,
-                 package: pkgName,
-                  schema: srcFile,  
-                  catalog: catFile,
-                  binding: bindFile,
-               extension: true, 
-         removeOldOutput: true,
+           //ant.xjc(    
+           //      destdir: xsdDestDir,
+           //      package: pkgName,
+           //       schema: srcFile,  
+           //       catalog: catFile,
+           //       binding: bindFile,
+           //    extension: true, 
+         //removeOldOutput: true,
              //failonerror: false
                            
-         )        
+         //)        
            ant.echo(level: "info", message: "schema compilation completed")     
    }   
            ant.echo(level: "info", message: "file list after executing JAXB") 
