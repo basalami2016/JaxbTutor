@@ -1,6 +1,8 @@
 plugins {
   id "java"
   id "org.sonarqube" version "2.2"
+  id "org.owasp.dependencycheck" version "1.4.4.1"
+  id "findbugs"
 }
 
 configurations {
