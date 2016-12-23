@@ -2,7 +2,7 @@ plugins {
   id "java"
   id "org.sonarqube" version "2.2"
   id "org.owasp.dependencycheck" version "1.4.4.1"
-  id "findbugs"
+  //id "findbugs"
   id "pmd"
 }
 
@@ -85,14 +85,6 @@ task jaxb{
            }     
 }
 
-tasks.withType(FindBugs) {
-    reports {
-        xml.enabled false
-        html.enabled true
-        html.stylesheet resources.text.fromFile('config/xsl/findbugs-custom.xsl')
-    }
-}
-
 jaxb.execute()
 
 task wrapper(type: Wrapper) {
@@ -117,7 +109,7 @@ task wrapper(type: Wrapper) {
 
 
 //http://stackoverflow.com/questions/23619178/how-to-compile-multiple-xsd-files-in-gradle-jaxb-xjc
-//
+//http://www.slideshare.net/SpringCentral/continuous-delivery-with-gradle-and-jenkins
 //configurations {
 //    compile {
 //        description = 'compile classpath'
